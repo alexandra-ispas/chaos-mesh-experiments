@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: burn-cpu
+spec:
+  mode: all # Required
+  stressors:
+    cpu:
+      workers: 14 # Required, specifies concurrent stressing instance.
+      load: 100 # 0 is effectively a sleep (no load) and 100 is full loading
+  selector:
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # the label of the pod for chaos injection
+  duration: '5m' # Required

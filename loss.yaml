@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-loss
+spec:
+  action: loss # the specific chaos action to inject
+  mode: all # the mode to run chaos action; supported modes are one/all/fixed/fixed-percent/random-max-percent
+  selector: # pods where to inject chaos actions
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # the label of the pod for chaos injection
+  loss:
+    loss: '50' # Percentage of lost packages
+    correlation: '25' # Required
+  duration: '5m' # duration for the injected chaos experiment

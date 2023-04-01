@@ -1,0 +1,17 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: cassandra-chaos
+spec:
+  action: corrupt # the specific chaos action to inject
+  mode: all # the mode to run chaos action, this will apply the chaos to all the selected nodes
+  selector:
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # replace this with the appropriate app-name
+  corrupt:
+    corrupt: '100' # Required, specifies the percentage of packet corruption.
+    correlation: '25' # Required
+  externalTargets:
+    - "" # replace with cassandra CIDR
+  duration: '5m' # duration for the injected chaos experiment
+  

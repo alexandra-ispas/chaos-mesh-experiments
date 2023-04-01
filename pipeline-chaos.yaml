@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: DNSChaos
+metadata:
+  name: dns-chaos-example # Required
+spec:
+  action: error # the specific chaos action to inject
+  mode: all # the mode to run chaos action; supported modes are one/all/fixed/fixed-percent/random-max-percent
+  patterns: # When patterns is not configured, faults are injected for all domains
+    - <pipeline-endpoint>
+  selector: # pods where to inject chaos actions
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # the label of the pod for chaos injection
+  duration: 5m # duration of chaos
+  

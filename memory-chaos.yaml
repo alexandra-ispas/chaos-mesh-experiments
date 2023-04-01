@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: memory-stress
+spec:
+  mode: all # Required
+  stressors:
+    memory:
+      workers: 4 # Required, the number of threads that apply memory stress.
+      size: '100%' # Specifies the total memory size to be occupied or a percentage of the total memory size.
+  selector:
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # replace this with the appropriate app-name
+  duration: '30m' # Required

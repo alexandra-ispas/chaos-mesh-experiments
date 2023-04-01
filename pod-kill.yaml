@@ -1,0 +1,12 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-kill
+spec:
+  action: pod-kill # Required
+  mode: all # one, all, fixed, fixed-percent, or random-max-percent
+  gracePeriod: 0 # GracePeriod is used in pod-kill action. The default value is zero that indicates delete immediately.
+  selector:
+    labelSelectors:
+       app.kubernetes.io/name: <app-name> # the label of the pod for chaos injection
+  duration: '30s' # duration for the injected chaos experiment
